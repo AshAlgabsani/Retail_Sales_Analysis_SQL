@@ -1,0 +1,145 @@
+-- Create a DATABASE for the shopify store Memo
+CREATE DATABASE memoshopifystore
+
+-- Access the DATABASE
+USE memoshopifystore;
+
+-- Create the sales table
+CREATE TABLE retail_sales
+			(
+				transaction_id INT PRIMARY KEY, 
+                sale_date DATE,
+                sale_time TIME,
+                customer_id  INT,
+                gender VARCHAR(15),
+                age  INT,
+                category VARCHAR(25),
+                quantity INT,
+                price_per_unit FLOAT,
+                cogs FLOAT,
+                total_sale FLOAT
+			)
+            
+
+-- INSERT THE DATA FROM THE SOURCE [a CSV file, in this case] INTO THE CORRESPONDING TABLE 
+LOAD DATA LOCAL INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SQL_Retail_Sales_Analysis_utf.csv'
+INTO TABLE retail_sales
+FIELDS TERMINATED BY ','
+IGNORE 1 ROWS;
+
+-- Data Exploration and Cleaning --
+-- Familiarize yourself with the data
+-- check the total number of records
+-- check how many unique customers
+-- check how many unique product categories in the dataset
+-- check for any mis-spellings / spaces / colmuns
+SELECT * FROM retail_sales
+SELECT COUNT(*) FROM retail_sales 
+SELECT COUNT(DISTINCT customer_id) from retail_sales
+SELECT DISTINCT category FROM retail_sales
+
+-- check for any null values
+SELECT * FROM retail_sales
+WHERE 
+		transaction_id IS NULL
+        OR
+        sale_date IS NULL
+        OR
+        sale_time IS NULL
+        OR
+        gender IS NULL
+        OR
+        category IS NULL
+        OR
+        quantity IS NULL
+        OR
+        cogs IS NULL
+        OR
+       total_sale IS NULL;
+
+
+-- Now with the data cleaned and explored; analyze the data based on the questions below:
+-- Retrieve all of the sales that were made on '2022-11-05'
+SELECT * FROM retail_sales
+WHERE sale_date = '2022/11/05';
+ 
+-- Retrieve all of the transactions of the month of Nov-2022, where the category is 'Clothing' and the quantity sold is more than 10 in
+SELECT * FROM retail_sales
+WHERE 
+	DATE_FORMAT(sale_date, '%Y-%m') = '2022-11'
+	AND
+	category = 'Clothing'
+    AND
+    quantity >= 10;
+
+-- Calculate the total revenue for each category
+SELECT category,
+		SUM(total_sale) as total_revenue_per_category
+FROM retail_sales
+GROUP BY category
+
+-- What is the average age of customers who purchased items from the 'Beauty' category
+SELECT
+	ROUND(AVG(age)) as avg_age
+FROM retail_sales
+WHERE category = 'Beauty';
+
+-- Retrieve all of the transactions that has a total_sale greater than 1000 and count what is the number of transactions over 1000
+SELECT *,
+		(SELECT COUNT(*)
+			FROM retail_sales
+				WHERE total_sale > 1000) AS number_of_transactions
+	FROM retail_sales
+	WHERE total_sale > 1000; 
+    
+-- What is the total number of transactions for each gender in each category
+SELECT 
+		category,
+        gender,
+        COUNT(*) as total_transactions_per_gender
+FROM retail_sales
+GROUP BY
+		category,
+        gender
+ORDER BY category;
+
+-- Calculate the average sale for each month. Find out best selling month in each year
+SELECT 
+  year,
+  month,
+  avg_sale
+FROM (
+  SELECT 
+    EXTRACT(YEAR FROM sale_date) AS year,
+    EXTRACT(MONTH FROM sale_date) AS month,
+    ROUND(AVG(total_sale)) AS avg_sale,
+    RANK() OVER (
+      PARTITION BY EXTRACT(YEAR FROM sale_date)
+      ORDER BY AVG(total_sale) DESC
+    ) AS rnk
+  FROM retail_sales
+  GROUP BY year, month
+) AS ranked_months
+WHERE rnk = 1;
+
+-- Who are the top 5 customers based on the highest total sales 
+SELECT 
+    customer_id,
+    SUM(total_sale) as total_sales
+FROM retail_sales
+GROUP BY customer_id
+ORDER BY total_sales DESC
+LIMIT 5;
+
+-- Create each shift and number of orders (Example Morning <=12, Afternoon Between 12 & 17, Evening >17)
+SELECT 
+	CASE
+		WHEN HOUR(sale_time) < 12 THEN 'Morning'
+        WHEN HOUR(sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
+        ELSE 'Evening'
+	END AS Shift,
+COUNT(*) AS total_orders
+FROM retail_sales
+GROUP BY shift;
+
+-- PROJECT COMPLETE --
