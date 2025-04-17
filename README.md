@@ -8,7 +8,7 @@
 **Data Source:** EXCEL                                                                                                                                                                                                        
 
 ## Objectives
-**1. DATABASE Setup.**                                                                                                                                                                                                
+**1. Database Setup.**                                                                                                                                                                                                
 **2. Data Cleaning.**                                                                                                                                                                                                         
 **3. Exploratory Data Analysis (EDA).**                                                                                                                                                                                       
 **4. Data Analysis.**                                                                                                                                                                                               
