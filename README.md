@@ -8,10 +8,10 @@
 **Data Source:** EXCEL                                                                                                                                                                                                        
 
 ## Objectives
-**1. Setup a sales database.**                                                                                                                                                                                                
+**1. DATABASE Setup.**                                                                                                                                                                                                
 **2. Data Cleaning.**                                                                                                                                                                                                         
 **3. Exploratory Data Analysis (EDA).**                                                                                                                                                                                       
-**4. Business Sales Analysis.**                                                                                                                                                                                               
+**4. Data Analysis.**                                                                                                                                                                                               
 
 ## Project Structure
 
