@@ -98,7 +98,7 @@ WHERE
 #### 9. Calculate the total revenue for each category
 ```sql
 SELECT category,
-		SUM(total_sale) as total_revenue_per_category
+	SUM(total_sale) as total_revenue_per_category
 FROM retail_sales
 GROUP BY category
 ```
