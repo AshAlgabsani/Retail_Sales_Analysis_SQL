@@ -3,7 +3,7 @@
 ## Project Overview
 
 **Project: Title:** Retail Sales Analysis                                                                                                                                                                                     
-**Client:** Memo's is a hypothetical retail store on Shopify who needs the help of data analysts to explore, clean, and analyze their sales data to answer specific business questions and derive insights from the sales data                                                                                                                                                                                                                          
+**Client:** Memo is a hypothetical retail store on Shopify who needs the help of data analysts to explore, clean, and analyze their sales data to answer specific business questions and derive insights from the sales data                                                                                                                                                                                                                          
 **Analysis tool:** SQL                                                                                                                                                                                                        
 **Data Source:** EXCEL                                                                                                                                                                                                        
 
