@@ -78,13 +78,13 @@ WHERE
 
 ## 6. Data Analysis based on client's [questions and concerns]
 
-### 7. Retrieve all of the sales that were made on '2022-11-05'
+#### 7. Retrieve all of the sales that were made on '2022-11-05'
 ```sql
 SELECT * FROM retail_sales
 WHERE sale_date = '2022/11/05';
 ```
 
-### 8. Retrieve all of the transactions of the month of Nov-2022, where the category is 'Clothing' and the quantity sold is more than 10 in
+#### 8. Retrieve all of the transactions of the month of Nov-2022, where the category is 'Clothing' and the quantity sold is more than 10 in
 ```sql
 SELECT * FROM retail_sales
 WHERE 
@@ -95,7 +95,7 @@ WHERE
     quantity >= 10;
 ```
 
-### 9. Calculate the total revenue for each category
+#### 9. Calculate the total revenue for each category
 ```sql
 SELECT category,
 		SUM(total_sale) as total_revenue_per_category
@@ -103,7 +103,7 @@ FROM retail_sales
 GROUP BY category
 ```
 
-### 10. What is the average age of customers who purchased items from the 'Beauty' category
+#### 10. What is the average age of customers who purchased items from the 'Beauty' category
 ```sql
 SELECT
 	ROUND(AVG(age)) as avg_age
@@ -111,7 +111,7 @@ FROM retail_sales
 WHERE category = 'Beauty';
 ```
 
-### 11. Retrieve all of the transactions that has a total_sale greater than 1000 and count what is the number of transactions over 1000
+#### 11. Retrieve all of the transactions that has a total_sale greater than 1000 and count what is the number of transactions over 1000
 ```sql
 SELECT *,
 		(SELECT COUNT(*)
@@ -121,7 +121,7 @@ SELECT *,
 	WHERE total_sale > 1000; 
 ```
 
-### 12. What is the total number of transactions for each gender in each category
+#### 12. What is the total number of transactions for each gender in each category
 ```sql
 SELECT 
 		category,
@@ -134,7 +134,7 @@ GROUP BY
 ORDER BY category;
 ```
 
-### 13. Calculate the average sale for each month. Find out best selling month in each year
+#### 13. Calculate the average sale for each month. Find out best selling month in each year
 ```sql
 SELECT 
   year,
@@ -155,7 +155,7 @@ FROM (
 WHERE rnk = 1;
 ```
 
-### 14. Who are the top 5 customers based on the highest total sales 
+#### 14. Who are the top 5 customers based on the highest total sales 
 ```sql
 SELECT 
     customer_id,
@@ -166,7 +166,7 @@ ORDER BY total_sales DESC
 LIMIT 5;
 ```
 
-### 15. Create each shift and number of orders (Example Morning <=12, Afternoon Between 12 & 17, Evening >17)
+#### 15. Create each shift and number of orders (Example Morning <=12, Afternoon Between 12 & 17, Evening >17)
 ```sql
 SELECT 
 	CASE
