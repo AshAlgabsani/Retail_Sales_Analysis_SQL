@@ -7,10 +7,10 @@ Analysis tool: SQL
 Data Source: EXCEL
 
 ## Objectives
-**1. Setup a sales database.
-**2. Data Cleaning.
-**3. Exploratory Data Analysis (EDA).
-**4. Business Sales Analysis.
+**1. Setup a sales database.**
+**2. Data Cleaning.**
+**3. Exploratory Data Analysis (EDA).**
+**4. Business Sales Analysis.**
 
 ## Project Structure
 
