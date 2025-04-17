@@ -24,7 +24,7 @@ CREATE DATABASE memoshopifystore
 ```sql
 CREATE TABLE retail_sales
 			(
-				transaction_id INT PRIMARY KEY, 
+		transaction_id INT PRIMARY KEY, 
                 sale_date DATE,
                 sale_time TIME,
                 customer_id  INT,
