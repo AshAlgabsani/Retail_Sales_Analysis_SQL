@@ -7,7 +7,7 @@ USE memoshopifystore;
 -- Create the sales table
 CREATE TABLE retail_sales
 			(
-				transaction_id INT PRIMARY KEY, 
+		transaction_id INT PRIMARY KEY, 
                 sale_date DATE,
                 sale_time TIME,
                 customer_id  INT,
@@ -33,6 +33,7 @@ IGNORE 1 ROWS;
 -- check how many unique customers
 -- check how many unique product categories in the dataset
 -- check for any mis-spellings / spaces / colmuns
+
 SELECT * FROM retail_sales
 SELECT COUNT(*) FROM retail_sales 
 SELECT COUNT(DISTINCT customer_id) from retail_sales
@@ -59,6 +60,7 @@ WHERE
 
 
 -- Now with the data cleaned and explored; analyze the data based on the questions below:
+
 -- Retrieve all of the sales that were made on '2022-11-05'
 SELECT * FROM retail_sales
 WHERE sale_date = '2022/11/05';
