@@ -59,7 +59,7 @@ SELECT DISTINCT category FROM retail_sales
 ```sql
 SELECT * FROM retail_sales
 WHERE 
-		transaction_id IS NULL
+	transaction_id IS NULL
         OR
         sale_date IS NULL
         OR
@@ -91,8 +91,8 @@ WHERE
 	DATE_FORMAT(sale_date, '%Y-%m') = '2022-11'
 	AND
 	category = 'Clothing'
-    AND
-    quantity >= 10;
+ 	AND
+    	quantity >= 10;
 ```
 
 #### 9. Calculate the total revenue for each category
@@ -115,8 +115,8 @@ WHERE category = 'Beauty';
 ```sql
 SELECT *,
 		(SELECT COUNT(*)
-			FROM retail_sales
-				WHERE total_sale > 1000) AS number_of_transactions
+		FROM retail_sales
+		WHERE total_sale > 1000) AS number_of_transactions
 	FROM retail_sales
 	WHERE total_sale > 1000; 
 ```
@@ -124,12 +124,12 @@ SELECT *,
 #### 12. What is the total number of transactions for each gender in each category
 ```sql
 SELECT 
-		category,
+	category,
         gender,
         COUNT(*) as total_transactions_per_gender
 FROM retail_sales
 GROUP BY
-		category,
+	category,
         gender
 ORDER BY category;
 ```
@@ -140,19 +140,19 @@ SELECT
   year,
   month,
   avg_sale
-FROM (
-  SELECT 
-    EXTRACT(YEAR FROM sale_date) AS year,
-    EXTRACT(MONTH FROM sale_date) AS month,
-    ROUND(AVG(total_sale)) AS avg_sale,
-    RANK() OVER (
-      PARTITION BY EXTRACT(YEAR FROM sale_date)
-      ORDER BY AVG(total_sale) DESC
+	FROM (
+ 	 SELECT 
+		EXTRACT(YEAR FROM sale_date) AS year,
+		EXTRACT(MONTH FROM sale_date) AS month,
+    		ROUND(AVG(total_sale)) AS avg_sale,
+	RANK() OVER (
+      	PARTITION BY EXTRACT(YEAR FROM sale_date)
+     	 ORDER BY AVG(total_sale) DESC
     ) AS rnk
-  FROM retail_sales
-  GROUP BY year, month
+	FROM retail_sales
+  	GROUP BY year, month
 ) AS ranked_months
-WHERE rnk = 1;
+	WHERE rnk = 1;
 ```
 
 #### 14. Who are the top 5 customers based on the highest total sales 
@@ -170,7 +170,7 @@ LIMIT 5;
 ```sql
 SELECT 
 	CASE
-		WHEN HOUR(sale_time) < 12 THEN 'Morning'
+	WHEN HOUR(sale_time) < 12 THEN 'Morning'
         WHEN HOUR(sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
         ELSE 'Evening'
 	END AS Shift,
